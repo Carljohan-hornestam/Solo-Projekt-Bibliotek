@@ -58,7 +58,7 @@ public class FileManager {
                 writer.close();
             }
         }
-// TODO GÖR MER GENERELL
+
     public List searchInList(String search, List<Book> foundBooks) {
         for (Book book : Library.books) {
             if (book.getTitle().toLowerCase().contains(search.toLowerCase())) {

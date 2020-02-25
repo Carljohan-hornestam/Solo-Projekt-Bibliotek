@@ -21,14 +21,13 @@ public class ReturnBook {
         }
         System.out.println("Enter the book's ISBN you wish to return: ");
         String isbn = scan.nextLine();
-        // TODO fixa så "," tas bort när man returnerar
 
         if (Library.users.get(0).getActiveLoans().contains(isbn)){
             for (Book bookToReturn : Library.books){
                 if (bookToReturn.getIsbn().equals(isbn)){
                     bookToReturn.setQuantity(bookToReturn.getQuantity() + 1);
                     System.out.println("You have successfully returned " + bookToReturn.getTitle());
-                    newActiveLoans = Library.users.get(0).getActiveLoans().replaceAll(isbn, "");
+                    newActiveLoans = Library.users.get(0).getActiveLoans().replaceAll(isbn + ",", "");
                     Library.users.get(0).setActiveLoans(newActiveLoans);
 
                 }

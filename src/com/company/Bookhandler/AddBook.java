@@ -25,35 +25,37 @@ public class AddBook {
     private String genre;
     private int quantity = 1;
     private boolean isRunning = true;
-    private boolean isDuplicate = true;
 
     public AddBook(Library library) {
         this.library = library;
     }
 
     public void addBook() {
-        enterIsbn();
-        enterTitle();
-        enterYear();
-        enterAuthor();
-        enterGenre();
-        addNewBook();
+        bookAddingProcess();
     }
 
-    private void enterIsbn() {
+    private void bookAddingProcess() {
+        boolean isDuplicate = false;
         do {
             System.out.println("Enter ISBN: ");
             isbn = scan.nextLine();
-            checkLengthOfString(isbn);
-            if (isbn.matches(".*[0-9].*")) {
-                checkForDuplicates(isbn);
-                bookDetails.add("ISBN: " + isbn);
-            } else {
-                System.out.println("You may only enter digits!");
-                isDuplicate = false;
+            if (isbn.matches(".*[0-9].*")){
+                if (checkLengthOfString(isbn)){
+                    if (checkForDuplicates(isbn)){
+                        return;
+                    }
+                    else {
+                        bookDetails.add("ISBN: " + isbn);
+                        isDuplicate = true;
+                    }
+                }
+            }
+            else {
+                System.out.println("The ISBN-number can only contain digits!");
             }
         }
         while (!isDuplicate);
+        enterTitle();
     }
 
     private void enterTitle() {
@@ -69,6 +71,7 @@ public class AddBook {
                 isRunning = false;
             }
         } while (!isRunning);
+        enterYear();
     }
 
     private void enterYear() {
@@ -84,6 +87,7 @@ public class AddBook {
                 isRunning = false;
             }
         } while (!isRunning);
+        enterAuthor();
     }
 
     private void enterAuthor() {
@@ -99,6 +103,7 @@ public class AddBook {
                 isRunning = false;
             }
         } while (!isRunning);
+        enterGenre();
     }
 
     private void enterGenre() {
@@ -114,9 +119,9 @@ public class AddBook {
                 isRunning = false;
             }
         } while (!isRunning);
+        addNewBook();
     }
 
-    // TODO fixa return false
     private boolean checkLengthOfString(String isbnToCheck) {
         Field[] fields = getClass().getDeclaredFields();
         for (Field field : fields) {
@@ -124,8 +129,8 @@ public class AddBook {
 
             for (Annotation annotation : annotations) {
                 LengthCheck checker = (LengthCheck) annotation;
-                if (isbnToCheck.length() > checker.minLength()) {
-                    System.out.println("The ISBN-number can not be longer than 13 digits!");
+                if (isbnToCheck.length() > checker.minLength() || isbnToCheck.length() < checker.minLength() ) {
+                    System.out.println("The ISBN-number must be 13 digits!");
                     return false;
                 }
             }

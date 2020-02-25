@@ -2,8 +2,6 @@ package com.company.Database;
 
 
 import com.company.Book;
-import com.company.Database.FileManager;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,7 +15,6 @@ public class Search {
         System.out.println("Search for title: ");
         search = scan.nextLine();
         foundBooks = FileManager.getInstance().searchInList(search, foundBooks);
-        // TODO fixa return
         if (foundBooks.size() == 0){
             System.out.println("No books found.");
         }

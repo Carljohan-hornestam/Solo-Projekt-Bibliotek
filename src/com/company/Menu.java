@@ -57,7 +57,6 @@ public class Menu {
             System.out.println("2: Edit book from library");
             System.out.println("3: Remove book from library");
             System.out.println("4: Back to main menu");
-            // TODO fixa case 4
             menuChoice = scan.nextLine();
 
             switch (menuChoice) {

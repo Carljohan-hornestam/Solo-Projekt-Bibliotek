@@ -11,7 +11,6 @@ public class BorrowBook {
     public BorrowBook(Library library){
         this.library = library;
     }
- // TODO fixa så man inte kommer hit om foundBooks = 0
     public void borrowBook(List<Book> booksToBorrow){
         if (booksToBorrow.size() == 0){
             return;
@@ -32,11 +31,11 @@ public class BorrowBook {
             System.out.println("You chose " + booksToBorrow.get(bookChoice - 1));
             selectedBook.setQuantity(selectedBook.getQuantity() - 1);
             if (Library.users.get(0).getActiveLoans().isBlank()) {
-                Library.users.get(0).setActiveLoans(selectedBook.getIsbn());
-                FileManager.getInstance().editFile(fileName, "Activeloans", "Activeloans: " + selectedBook.getIsbn());
+                Library.users.get(0).setActiveLoans(selectedBook.getIsbn() + ", ");
+                FileManager.getInstance().editFile(fileName, "Activeloans", "Activeloans: " + selectedBook.getIsbn() + ", ");
             }
             else {
-                Library.users.get(0).setActiveLoans(Library.users.get(0).getActiveLoans() + ", " + selectedBook.getIsbn());
+                Library.users.get(0).setActiveLoans(Library.users.get(0).getActiveLoans() + selectedBook.getIsbn() + ", ");
                 FileManager.getInstance().editFile(fileName, "Activeloans", "Activeloans: " + Library.users.get(0).getActiveLoans());
             }
         }

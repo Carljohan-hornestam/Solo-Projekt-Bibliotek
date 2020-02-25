@@ -11,6 +11,9 @@ public class BookDeleter {
     Scanner scan = new Scanner(System.in);
 
     public void deleteChoice(List<Book> foundBooks){
+        if (foundBooks.size() == 0){
+            return;
+        }
         int placeInList = 1;
         for (Book book : foundBooks){
             System.out.println(placeInList + " " + book);
@@ -20,7 +23,7 @@ public class BookDeleter {
         int bookChoice = scan.nextInt();
         System.out.println("You chose " + foundBooks.get(bookChoice - 1));
         Book selectedBook = foundBooks.get(bookChoice - 1);
-        Library.books.remove(bookChoice);
+        Library.books.remove(selectedBook);
         deleteBook(selectedBook);
     }
     public void deleteBook(Book selectedBook) {

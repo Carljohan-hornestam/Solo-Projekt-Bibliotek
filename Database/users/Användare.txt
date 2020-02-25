@@ -1,0 +1,5 @@
+name: Användare
+mail: användare@användare.se
+tel: 0707123456
+Activeloans:  
+uniqueId: 123456789

@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BookEditor {
-    String newTitle = null;
     Scanner scan = new Scanner(System.in);
     boolean isOk = false;
 
 public void editChoice(List<Book> foundBooks){
+    if (foundBooks.size() == 0){
+        return;
+    }
     int placeInList = 1;
     for (Book book : foundBooks){
         System.out.println(placeInList + " " + book);
@@ -25,15 +27,18 @@ public void editChoice(List<Book> foundBooks){
 }
     public void editBook(Book selectedBook) {
         String fileName = "Database/books/" + selectedBook.getTitle() + ".txt";
+        String newTitle;
         do {
             System.out.println("Enter new title: ");
-            newTitle = scan.nextLine();
+            do {
+                newTitle = scan.nextLine();
+            } while (newTitle.length() == 0);
+
             if (newTitle.matches(".*[A-Za-z].*")) {
                 selectedBook.setTitle(newTitle);
                 System.out.println(newTitle + " is now the new title of " + selectedBook);
                 isOk = true;
             } else {
-                // TODO fixa bug med att detta skrivs ut direkt
                 System.out.println("Input can not contain only digits!");
             }
         } while (!isOk);
