@@ -18,12 +18,6 @@ public class AddBook {
     private List<String> bookDetails = new ArrayList<>();
 
     @LengthCheck(minLength = 13)
-    private String isbn;
-    private String title;
-    private String year;
-    private String author;
-    private String genre;
-    private int quantity = 1;
     private boolean isRunning = true;
 
     public AddBook(Library library) {
@@ -36,29 +30,26 @@ public class AddBook {
 
     private void bookAddingProcess() {
         boolean isDuplicate = false;
+
+        String isbn;
         do {
             System.out.println("Enter ISBN: ");
             isbn = scan.nextLine();
-            if (isbn.matches(".*[0-9].*")){
-                if (checkLengthOfString(isbn)){
-                    if (checkForDuplicates(isbn)){
+            if (isbn.matches(".*[0-9].*")) {
+                if (checkLengthOfString(isbn)) {
+                    if (checkForDuplicates(isbn)) {
                         return;
-                    }
-                    else {
+                    } else {
                         bookDetails.add("ISBN: " + isbn);
                         isDuplicate = true;
                     }
                 }
-            }
-            else {
+            } else {
                 System.out.println("The ISBN-number can only contain digits!");
             }
-        }
-        while (!isDuplicate);
-        enterTitle();
-    }
+        } while (!isDuplicate);
 
-    private void enterTitle() {
+        String title;
         do {
             System.out.println("Enter title: ");
             title = scan.nextLine();
@@ -71,10 +62,8 @@ public class AddBook {
                 isRunning = false;
             }
         } while (!isRunning);
-        enterYear();
-    }
 
-    private void enterYear() {
+        String year;
         do {
             System.out.println("Enter the year of release: ");
             year = scan.nextLine();
@@ -87,10 +76,8 @@ public class AddBook {
                 isRunning = false;
             }
         } while (!isRunning);
-        enterAuthor();
-    }
 
-    private void enterAuthor() {
+        String author;
         do {
             System.out.println("Enter the name of the author: ");
             author = scan.nextLine();
@@ -103,10 +90,8 @@ public class AddBook {
                 isRunning = false;
             }
         } while (!isRunning);
-        enterGenre();
-    }
 
-    private void enterGenre() {
+        String genre;
         do {
             System.out.println("Enter the genre of the book: ");
             genre = scan.nextLine();
@@ -119,7 +104,7 @@ public class AddBook {
                 isRunning = false;
             }
         } while (!isRunning);
-        addNewBook();
+        addNewBook(isbn, title, year, author, genre);
     }
 
     private boolean checkLengthOfString(String isbnToCheck) {
@@ -129,7 +114,7 @@ public class AddBook {
 
             for (Annotation annotation : annotations) {
                 LengthCheck checker = (LengthCheck) annotation;
-                if (isbnToCheck.length() > checker.minLength() || isbnToCheck.length() < checker.minLength() ) {
+                if (isbnToCheck.length() > checker.minLength() || isbnToCheck.length() < checker.minLength()) {
                     System.out.println("The ISBN-number must be 13 digits!");
                     return false;
                 }
@@ -149,7 +134,8 @@ public class AddBook {
         return false;
     }
 
-    private void addNewBook() {
+    private void addNewBook(String isbn, String title, String year, String author, String genre) {
+        int quantity = 1;
         Library.books.add(new Book(isbn, title, year, author, genre, quantity));
         System.out.println(title + " by " + author + " created!");
         String newBookFile = "Database/books/" + title;

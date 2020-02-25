@@ -1,6 +1,8 @@
-package com.company;
+package com.company.Bookhandler;
 
+import com.company.Book;
 import com.company.Database.FileManager;
+import com.company.Library;
 
 import java.util.List;
 import java.util.Scanner;
@@ -11,6 +13,7 @@ public class BorrowBook {
     public BorrowBook(Library library){
         this.library = library;
     }
+
     public void borrowBook(List<Book> booksToBorrow){
         if (booksToBorrow.size() == 0){
             return;

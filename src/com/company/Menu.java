@@ -1,8 +1,6 @@
 package com.company;
 
-import com.company.Bookhandler.AddBook;
-import com.company.Bookhandler.BookDeleter;
-import com.company.Bookhandler.BookEditor;
+import com.company.Bookhandler.*;
 import com.company.Database.Search;
 
 import java.util.List;
