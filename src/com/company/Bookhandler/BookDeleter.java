@@ -27,7 +27,7 @@ public class BookDeleter {
         deleteBook(selectedBook);
     }
     public void deleteBook(Book selectedBook) {
-        String fileName = "Database/books/" + selectedBook.getTitle() + ".txt";
+        String fileName = selectedBook.getRandomFileName();
         FileManager.getInstance().deleteFile(fileName);
     }
 }

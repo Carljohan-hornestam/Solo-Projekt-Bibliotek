@@ -1,5 +1,0 @@
-isbn: 1234567890987
-title: Lord of the Rings
-year: 1954
-author: J.R.R Tolkien
-genre: test

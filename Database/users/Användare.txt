@@ -1,5 +1,5 @@
 name: Användare
 mail: användare@användare.se
 tel: 0707123456
-Activeloans:  
+Activeloans: 0874839382017, 
 uniqueId: 123456789

@@ -21,12 +21,13 @@ public void editChoice(List<Book> foundBooks){
     }
     System.out.println("What book's title would you like to edit? Enter its number: ");
     int bookChoice = scan.nextInt();
+
     System.out.println("You chose " + foundBooks.get(bookChoice - 1));
     Book selectedBook = foundBooks.get(bookChoice - 1);
     editBook(selectedBook);
 }
     public void editBook(Book selectedBook) {
-        String fileName = "Database/books/" + selectedBook.getTitle() + ".txt";
+        String fileName = selectedBook.getRandomFileName();
         String newTitle;
         do {
             System.out.println("Enter new title: ");
@@ -44,6 +45,5 @@ public void editChoice(List<Book> foundBooks){
         } while (!isOk);
 
         FileManager.getInstance().editFile(fileName, "Title", "Title: " + newTitle);
-        FileManager.getInstance().renameFile(fileName, "Database/books/" + newTitle + ".txt");
     }
 }

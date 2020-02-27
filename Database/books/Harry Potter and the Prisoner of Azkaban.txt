@@ -1,5 +1,0 @@
-ISBN: 0874839382004
-Title: Harry Potter and the Prisoner of Azkaban
-Year: 1997
-Author: J.K. Rowling
-Genre: Fantasy

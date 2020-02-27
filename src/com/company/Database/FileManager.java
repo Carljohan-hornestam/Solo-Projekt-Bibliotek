@@ -8,9 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class FileManager {
     private static FileManager fileManager = null;
@@ -26,8 +24,7 @@ public class FileManager {
     }
 
     public File[] readFromFolder(File folderPath) {
-        File[] fileList = folderPath.listFiles();
-        return fileList;
+        return folderPath.listFiles();
     }
 
     public List<String> readFromFile(Path path) {
@@ -40,29 +37,50 @@ public class FileManager {
         return contents;
     }
 
-    public void writeToFile(String fileName, List <String> details) {
-        File file = new File(fileName + ".txt");
+    public void writeToFile(String fileName, List<String> details) {
+        File file = new File(fileName);
 
-            if (file.exists()) {
-                System.out.println("Filename already exists!");
-            } else {
-                PrintWriter writer = null;
-                try {
-                    writer = new PrintWriter(fileName + ".txt", StandardCharsets.UTF_8);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+        if (file.exists()) {
+            System.out.println("Filename already exists!");
+        } else {
+            try (PrintWriter writer = new PrintWriter(fileName, StandardCharsets.UTF_8)) {
                 for (String detail : details) {
                     writer.println(detail);
                 }
-                writer.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         }
+    }
 
-    public List searchInList(String search, List<Book> foundBooks) {
-        for (Book book : Library.books) {
-            if (book.getTitle().toLowerCase().contains(search.toLowerCase())) {
-                foundBooks.add(book);
+    public List<Book> searchInList(String search, String whatToSearchFor) {
+        List<Book> foundBooks = new ArrayList<>();
+        if (whatToSearchFor.equals("title")) {
+            for (Book book : Library.books) {
+                if (book.getTitle().toLowerCase().contains(search.toLowerCase())) {
+                    foundBooks.add(book);
+                }
+            }
+        }
+        if (whatToSearchFor.equals("author")) {
+            for (Book book : Library.books) {
+                if (book.getAuthor().toLowerCase().contains(search.toLowerCase())) {
+                    foundBooks.add(book);
+                }
+            }
+        }
+        if (whatToSearchFor.equals("genre")) {
+            for (Book book : Library.books) {
+                if (book.getGenre().toLowerCase().contains(search.toLowerCase())) {
+                    foundBooks.add(book);
+                }
+            }
+        }
+        if (whatToSearchFor.equals("year")) {
+            for (Book book : Library.books) {
+                if (book.getYear().toLowerCase().contains(search.toLowerCase())) {
+                    foundBooks.add(book);
+                }
             }
         }
         return foundBooks;
@@ -95,32 +113,32 @@ public class FileManager {
             ex.printStackTrace();
         }
     }
-    public void renameFile(String fileName, String newFileName){
+    @Deprecated
+    // No longer in use
+    public void renameFile(String fileName, String newFileName) {
         File oldFile = new File(fileName);
         File newFile = new File(newFileName);
         boolean rename = oldFile.renameTo(new File(String.valueOf(newFile)));
-        if (rename){
+        if (rename) {
             System.out.println("File successfully renamed");
-        }
-        else {
+        } else {
             System.out.println("Failed to rename");
         }
     }
-    public void deleteFile(String fileName){
+
+    public void deleteFile(String fileName) {
         File fileToDelete = new File(fileName);
 
-        if (!fileToDelete.exists()){
+        if (!fileToDelete.exists()) {
             System.out.println("That file doesn't exist!");
             return;
         }
         try {
             fileToDelete.delete();
             System.out.println("File deleted");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error trying to delete file!");
         }
     }
-
 }

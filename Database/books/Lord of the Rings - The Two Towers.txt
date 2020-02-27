@@ -1,5 +1,0 @@
-isbn: 0192837468173
-title: Lord of the Rings - The Two Towers
-year: 1954
-author: J.R.R Tolkien
-genre: Fantasy

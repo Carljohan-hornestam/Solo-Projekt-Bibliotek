@@ -5,5 +5,5 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LengthCheck {
-    int minLength();
+    int value();
 }

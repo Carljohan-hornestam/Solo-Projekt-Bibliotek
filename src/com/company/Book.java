@@ -1,16 +1,21 @@
 package com.company;
 
+import com.company.Database.LengthCheck;
+
 import java.util.List;
+import java.util.UUID;
 
 public class Book {
-
+    @LengthCheck(13)
     private String isbn;
     private String title;
+    @LengthCheck(4)
     private String year;
     private String author;
     private String genre;
     private int quantity;
     private int totalQuantity;
+    private String randomFileName;
 
     public Book (String isbn, String title, String year, String author, String genre, int quantity) {
         this.isbn = isbn;
@@ -19,6 +24,7 @@ public class Book {
         this.author = author;
         this.genre = genre;
         this.quantity = quantity;
+        this.randomFileName = generateRandomFileName();
     }
 
     public Book(List<String> readFromFile, String fileName) {
@@ -37,8 +43,19 @@ public class Book {
         this.genre = stringsInfo[4];
         this.quantity = 1;
         this.totalQuantity = 1;
+        this.randomFileName = fileName;
+    }
+    public String generateRandomFileName(){
+        return UUID.randomUUID() + ".txt";
     }
 
+    public String getRandomFileName() {
+        return randomFileName;
+    }
+
+    public void setRandomFileName(String randomFileName) {
+        this.randomFileName = randomFileName;
+    }
 
     public String getIsbn() {
         return isbn;

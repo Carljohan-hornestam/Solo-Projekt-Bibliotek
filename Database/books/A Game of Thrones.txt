@@ -1,5 +1,0 @@
-Isbn: 2919383910298
-Title: A Game of Thrones
-Year: 1996
-Author: George R.R Martin
-Genre: Fantasy
