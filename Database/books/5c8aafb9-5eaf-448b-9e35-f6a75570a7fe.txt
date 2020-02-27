@@ -1,0 +1,5 @@
+ISBN: 0874839382017
+Title: Harry Potter and the Philosopher's Stone
+Year: 1997
+Author: J.K. Rowling
+Genre: Fantasy

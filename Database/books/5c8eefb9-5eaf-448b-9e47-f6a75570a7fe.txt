@@ -1,0 +1,5 @@
+isbn: 1111234327648
+title: Lord of the Rings - The Return of the King
+year: 1955
+author: J.R.R Tolkien
+genre: Fantasy

@@ -1,0 +1,5 @@
+ISBN: 0874839382004
+Title: Harry P
+Year: 1997
+Author: J.K. Rowling
+Genre: Fantasy
